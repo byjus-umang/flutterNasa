@@ -26,10 +26,15 @@ class Error extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          Text(
-            this.title,
-            style: TextStyle(color: Colors.white),
-          ),
+          Container(
+              padding: EdgeInsets.all(3),
+              child: Center(
+                child: Text(
+                  this.title,
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w400),
+                ),
+              )),
           SizedBox(
             height: 20,
           ),

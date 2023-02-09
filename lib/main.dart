@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "Date Picker",
       home: HomePage(),
     );
@@ -69,6 +70,7 @@ class _HomePage extends State<HomePage> {
                     setState(() {
                       uri =
                           "https://api.nasa.gov/planetary/apod?api_key=OHF8WZZT5AIs0UklqfKW1mHQvs6zLputIzkinGbb";
+                      date = DateFormat('yyyy-MM-dd').format(DateTime.now());
                       nasa = fetchdata();
                     });
                   },
@@ -177,7 +179,11 @@ class _HomePage extends State<HomePage> {
                   ),
                 ]));
               } else if (snapshot.hasError) {
-                return Text("error"); //Error(error: snapshot.error);
+                return Error(
+                  error: snapshot.error,
+                  title:
+                      "Try to Refresh the Page Or Check Your  internet connection",
+                ); //Error(error: snapshot.error);
               } else {
                 return Center(
                     child: CircularProgressIndicator(
