@@ -2,16 +2,17 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:gaming_app/models.dart';
+// ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
 import 'package:gaming_app/image.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:http/http.dart' as http;
-import 'Error.dart';
+import 'error.dart';
 
 void main() {
   runApp(MyApp());
 }
 
+// ignore: use_key_in_widget_constructors
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// ignore: use_key_in_widget_constructors
 class HomePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -43,8 +45,6 @@ class _HomePage extends State<HomePage> {
     if (response.statusCode == 200) {
       Nasa jsonList = Nasa.fromJson(jsonDecode(response.body));
 
-      print(jsonList);
-
       return jsonList;
     }
     throw Exception("Http call not made");
@@ -61,7 +61,7 @@ class _HomePage extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            title: Text("The Nasa Apod App"),
+            title: const Text("The Nasa Apod App"),
             backgroundColor: Colors.redAccent,
             elevation: 16.0,
             actions: <Widget>[
@@ -74,7 +74,7 @@ class _HomePage extends State<HomePage> {
                       nasa = fetchdata();
                     });
                   },
-                  icon: Icon(Icons.autorenew))
+                  icon: const Icon(Icons.autorenew))
             ] //background color of app bar
             ),
         body: FutureBuilder<Nasa>(
@@ -87,7 +87,7 @@ class _HomePage extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        padding: EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.all(5.0),
                         width: 250,
                         child: Text(
                           snapshot.data!.title.toString(),
@@ -99,7 +99,7 @@ class _HomePage extends State<HomePage> {
                         ),
                       ),
                       Container(
-                          padding: EdgeInsets.all(15),
+                          padding: const EdgeInsets.all(15),
                           height: MediaQuery.of(context).size.width / 3,
                           child: Center(
                               child: ElevatedButton(
@@ -128,14 +128,14 @@ class _HomePage extends State<HomePage> {
                                 });
                               } else {}
                             },
-                            child: Text("Date"),
+                            child: const Text("Date"),
                           )))
                     ],
                   ),
                   Center(
                     child: InkWell(
                       child: Container(
-                        padding: EdgeInsets.only(left: 10, right: 10),
+                        padding: const EdgeInsets.only(left: 10, right: 10),
                         width: 350,
                         height: 350,
                         child: Image.network(
@@ -156,10 +156,10 @@ class _HomePage extends State<HomePage> {
                   ),
                   Center(
                       child: Container(
-                    padding: EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(16.0),
                     child: Text(
-                      "$date",
-                      style: TextStyle(
+                      date,
+                      style: const TextStyle(
                         fontSize: 25,
                         color: Colors.red,
                       ),
@@ -167,7 +167,7 @@ class _HomePage extends State<HomePage> {
                   )),
                   Center(
                     child: Container(
-                        padding: EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(16.0),
                         child: Text(
                           snapshot.data!.explanation.toString(),
                           style: TextStyle(
@@ -185,7 +185,7 @@ class _HomePage extends State<HomePage> {
                       "Try to Refresh the Page Or Check Your  internet connection",
                 ); //Error(error: snapshot.error);
               } else {
-                return Center(
+                return const Center(
                     child: CircularProgressIndicator(
                   valueColor: AlwaysStoppedAnimation(Colors.blue),
                 ));
